@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
-from torchvision import datasets
+from torchvision import datasets, transforms
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from matplotlib import pyplot
@@ -12,9 +12,9 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 def make_confusion_matrix_given_model(model: nn.Module):
     # horribly inefficient, but I want to keep the main file as simple as possible
     batch_size = 1000
-    test_dataset = datasets.MNIST(root='./data', train=False, download=True)
-    test_loader = DataLoader(test_dataset, batch_size = batch_size, shuffle=False)
-    (data, target) = test_loader[0]
+    test_dataset = datasets.MNIST(root='./data', train=False, download=True, transform=transforms.ToTensor())
+    test_loader = DataLoader(test_dataset, batch_size = batch_size, shuffle=False, transform=transforms.ToTensor())
+    data, target = next(iter(test_loader))
     
     with torch.no_grad():
         # typecast the target so that we get intellisense help
