@@ -31,8 +31,6 @@ def save_preheated_mnist(model: nn.Module, save_file_int=1):
     import os
     from pathlib import Path
     file_name = str(Path(os.path.dirname(__file__)) / 'weights' / f'{save_file_int}.pt')
-    
-    model = ExampleMNISTModel()
     torch.save(model.state_dict(), file_name)
     
 
