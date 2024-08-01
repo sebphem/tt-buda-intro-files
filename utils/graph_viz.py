@@ -42,7 +42,17 @@ def graph_loss(**name_and_loss):
     # return plt
     # all the user needs to do is just
     plt.show()
-    
+
+def graph_accuracy(**name_and_loss):
+    for name, loss in name_and_loss.items():
+        plt.plot([i for i, val in enumerate(loss)], loss, label=name)
+    plt.legend()
+    plt.xlabel("Epoch Number")
+    plt.ylabel("Accuracy")
+    # return plt
+    # all the user needs to do is just
+    plt.show()
+ 
 if __name__ == '__main__':
     import sys
     sys.path.append('../')
